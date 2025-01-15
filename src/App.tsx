@@ -5,18 +5,33 @@ import checkmark from "./assets/checkmark.png";
 import fullscreenicon from "./assets/fullscreen.png";
 import Modal from "react-modal";
 import { useState } from "react";
-import { FullScreen, useFullScreenHandle } from "react-full-screen";
 
 Modal.setAppElement("#root"); // Set the app root for accessibility
 
 function App() {
-	const handle = useFullScreenHandle();
 	const [modalIsOpen, setModalIsOpen] = useState(true);
 	const [name, setName] = useState("");
 
 	const handleNameSubmit = (e: { preventDefault: () => void }) => {
 		e.preventDefault();
 		setModalIsOpen(false);
+	};
+	const [isFullScreen, setIsFullScreen] = useState(false);
+
+	const toggleFullScreen = () => {
+		if (!document.fullscreenElement) {
+			// Request full screen
+			if (document.documentElement.requestFullscreen) {
+				document.documentElement.requestFullscreen();
+			}
+			setIsFullScreen(true);
+		} else {
+			// Exit full screen
+			if (document.exitFullscreen) {
+				document.exitFullscreen();
+			}
+			setIsFullScreen(false);
+		}
 	};
 
 	const today = new Date();
@@ -34,7 +49,7 @@ function App() {
 	const end_time = `${String(endHour).padStart(2, "0")}:00`;
 
 	return (
-		<FullScreen handle={handle}>
+		<>
 			<Modal
 				isOpen={modalIsOpen}
 				onRequestClose={() => setModalIsOpen(false)}
@@ -71,7 +86,7 @@ function App() {
 								שפה:
 							</h2>
 						</div>
-						<button onClick={handle.active ? handle.exit : handle.enter}>
+						<button onClick={toggleFullScreen}>
 							<img className="w-8" src={fullscreenicon} alt="" />
 						</button>
 						<img className="w-8 rounded-lg mr-4" src={home} alt="home" />
@@ -117,7 +132,7 @@ function App() {
 					</div>
 				</div>
 			</div>
-		</FullScreen>
+		</>
 	);
 }
 
