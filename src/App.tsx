@@ -16,7 +16,7 @@ function App() {
 		e.preventDefault();
 		setModalIsOpen(false);
 	};
-	const [isFullScreen, setIsFullScreen] = useState(false);
+	const [_isFullScreen, setIsFullScreen] = useState(false);
 
 	const toggleFullScreen = () => {
 		if (!document.fullscreenElement) {
