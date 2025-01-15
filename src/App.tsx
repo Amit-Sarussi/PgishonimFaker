@@ -16,22 +16,27 @@ function App() {
 		e.preventDefault();
 		setModalIsOpen(false);
 	};
-	const [_isFullScreen, setIsFullScreen] = useState(false);
+	const [isFullScreen, setIsFullScreen] = useState(false);
 
 	const toggleFullScreen = () => {
-		if (!document.fullscreenElement) {
-			// Request full screen
-			if (document.documentElement.requestFullscreen) {
-				document.documentElement.requestFullscreen();
-			}
-			setIsFullScreen(true);
-		} else {
-			// Exit full screen
+		const rootElement = document.getElementById("root");
+
+		if (isFullScreen) {
+			// If currently fullscreen, exit fullscreen
 			if (document.exitFullscreen) {
 				document.exitFullscreen();
 			}
-			setIsFullScreen(false);
+		} else {
+			// If not fullscreen, request fullscreen
+			if (rootElement) {
+				if (rootElement.requestFullscreen) {
+					rootElement.requestFullscreen();
+				}
+			}
 		}
+
+		// Toggle the fullscreen state
+		setIsFullScreen(!isFullScreen);
 	};
 
 	const today = new Date();
@@ -86,9 +91,7 @@ function App() {
 								שפה:
 							</h2>
 						</div>
-						<button onClick={toggleFullScreen}>
-							<img className="w-8" src={fullscreenicon} alt="" />
-						</button>
+						<button onClick={toggleFullScreen}>Toggle Full Screen</button>
 						<img className="w-8 rounded-lg mr-4" src={home} alt="home" />
 					</div>
 
