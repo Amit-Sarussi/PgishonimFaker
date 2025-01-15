@@ -2,7 +2,7 @@ import "./App.css";
 import flag from "./assets/flag.jpg";
 import home from "./assets/home.png";
 import checkmark from "./assets/checkmark.png";
-import fullscreenicon from "./assets/fullscreen.png";
+// import fullscreenicon from "./assets/fullscreen.png";
 import Modal from "react-modal";
 import { useState } from "react";
 
@@ -15,28 +15,6 @@ function App() {
 	const handleNameSubmit = (e: { preventDefault: () => void }) => {
 		e.preventDefault();
 		setModalIsOpen(false);
-	};
-	const [isFullScreen, setIsFullScreen] = useState(false);
-
-	const toggleFullScreen = () => {
-		const rootElement = document.getElementById("root");
-
-		if (isFullScreen) {
-			// If currently fullscreen, exit fullscreen
-			if (document.exitFullscreen) {
-				document.exitFullscreen();
-			}
-		} else {
-			// If not fullscreen, request fullscreen
-			if (rootElement) {
-				if (rootElement.requestFullscreen) {
-					rootElement.requestFullscreen();
-				}
-			}
-		}
-
-		// Toggle the fullscreen state
-		setIsFullScreen(!isFullScreen);
 	};
 
 	const today = new Date();
@@ -91,7 +69,7 @@ function App() {
 								שפה:
 							</h2>
 						</div>
-						<button onClick={toggleFullScreen}>Toggle Full Screen</button>
+
 						<img className="w-8 rounded-lg mr-4" src={home} alt="home" />
 					</div>
 
@@ -127,8 +105,8 @@ function App() {
 							עדכון יציאה מבית הספר!
 						</h1>
 					</div>
-					<div className="h-[40%] flex justify-center items-center">
-						<img className="w-[55vw]" src={checkmark} alt="" />
+					<div className="h-[30%] flex justify-center items-center">
+						<img className="w-[45vw]" src={checkmark} alt="" />
 					</div>
 					<div className="text-[16px] font-bold ">
 						<h2>אושר על ידי: מחנכת כיתה</h2>
