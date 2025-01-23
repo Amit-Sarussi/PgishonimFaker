@@ -1,11 +1,12 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createHashRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import Statistics from "./pages/Statistics";
 import NotFound from "./pages/NotFound";
 
-const router = createBrowserRouter([
+// Switch to createHashRouter
+const router = createHashRouter([
 	{
 		path: "/",
 		element: <HomePage />,
