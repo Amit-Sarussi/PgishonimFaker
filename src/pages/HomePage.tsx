@@ -1,20 +1,21 @@
-import "./App.css";
-import flag from "./assets/flag.jpg";
-import home from "./assets/home.png";
-import checkmark from "./assets/checkmark.png";
-// import fullscreenicon from "./assets/fullscreen.png";
+import "../assets/App.css";
+import flag from "../assets/flag.jpg";
+import home from "../assets/home.png";
+import checkmark from "../assets/checkmark.png";
 import Modal from "react-modal";
 import { useState } from "react";
+import { saveDataToFirebase } from "../scripts/firebase";
 
 Modal.setAppElement("#root"); // Set the app root for accessibility
 
-function App() {
+function HomePage() {
 	const [modalIsOpen, setModalIsOpen] = useState(true);
 	const [name, setName] = useState("");
 
 	const handleNameSubmit = (e: { preventDefault: () => void }) => {
 		e.preventDefault();
 		setModalIsOpen(false);
+		saveDataToFirebase(name);
 	};
 
 	const today = new Date();
@@ -117,4 +118,4 @@ function App() {
 	);
 }
 
-export default App;
+export default HomePage;
