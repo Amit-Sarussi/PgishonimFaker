@@ -3,7 +3,7 @@ import flag from "../assets/flag.jpg";
 import home from "../assets/home.png";
 import checkmark from "../assets/checkmark.png";
 import Modal from "react-modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { saveDataToFirebase } from "../scripts/firebase";
 
 Modal.setAppElement("#root"); // Set the app root for accessibility
@@ -11,6 +11,25 @@ Modal.setAppElement("#root"); // Set the app root for accessibility
 function HomePage() {
 	const [modalIsOpen, setModalIsOpen] = useState(true);
 	const [name, setName] = useState("");
+
+	useEffect(() => {
+		let timeout: NodeJS.Timeout;
+
+		const handleScroll = () => {
+			clearTimeout(timeout);
+
+			timeout = setTimeout(() => {
+				window.scrollTo({ top: 0, behavior: "smooth" });
+			}, 70); // Adjust delay if needed
+		};
+
+		window.addEventListener("scroll", handleScroll);
+
+		return () => {
+			clearTimeout(timeout);
+			window.removeEventListener("scroll", handleScroll);
+		};
+	}, []);
 
 	const handleNameSubmit = (e: { preventDefault: () => void }) => {
 		e.preventDefault();
@@ -61,7 +80,7 @@ function HomePage() {
 				</div>
 			</Modal>
 
-			<div className="absolute top-0 left-0 flex justify-center items-center w-screen h-screen bg-[#173fa1] ariel">
+			<div className="flex justify-center items-center w-screen h-screen bg-[#173fa1] ariel">
 				<div className="w-[90%] h-[95%] flex flex-col items-center gap-4 bg-[rgb(255,255,255,0.85)] rounded-[40px] overflow-hidden">
 					<div className="h-[50px] w-full mt-2 flex justify-between items-center">
 						<div className="flex justify-center items-center gap-3 ml-4">
@@ -114,6 +133,7 @@ function HomePage() {
 					</div>
 				</div>
 			</div>
+			{!modalIsOpen && <div className="h-[30dvh] w-full bg-white"></div>}
 		</>
 	);
 }
