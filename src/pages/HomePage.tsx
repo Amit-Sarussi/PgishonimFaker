@@ -19,9 +19,3 @@ function HomePage() {
 }
 
 export default HomePage;
-
-declare global {
-	interface Window {
-		adsbygoogle: any[];
-	}
-}
