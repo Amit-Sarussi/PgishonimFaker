@@ -34,17 +34,6 @@ const NameInput = ({ time, name, setName, setOnNameEdit }: NameInputProps) => {
 		return () => clearInterval(timer);
 	}, [time]);
 
-	// Load AdSense script properly
-	useEffect(() => {
-		if (typeof window !== "undefined" && window.adsbygoogle) {
-			try {
-				window.adsbygoogle.push({});
-			} catch (e) {
-				console.error("AdSense error:", e);
-			}
-		}
-	}, []);
-
 	const handleSubmit = (e: { preventDefault: () => void }) => {
 		e.preventDefault();
 		if (!name.trim()) return; // Prevent submission if name is empty
@@ -54,19 +43,6 @@ const NameInput = ({ time, name, setName, setOnNameEdit }: NameInputProps) => {
 
 	return (
 		<div className="flex flex-col justify-center items-center h-screen bg-gray-100 gap-12">
-			<div className="w-80 h-60">
-				<script
-					async
-					src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5104275071488401"
-					crossOrigin="anonymous"></script>
-				<ins
-					className="adsbygoogle block"
-					data-ad-client="ca-pub-5104275071488401"
-					data-ad-slot="4355756984"
-					data-ad-format="auto"
-					data-full-width-responsive="true"></ins>
-			</div>
-
 			<div className="bg-white rounded-lg shadow-lg p-6 w-80">
 				<form onSubmit={handleSubmit} className="space-y-4">
 					<h2 className="text-xl font-semibold text-gray-800">
@@ -91,15 +67,8 @@ const NameInput = ({ time, name, setName, setOnNameEdit }: NameInputProps) => {
 					</button>
 				</form>
 			</div>
-			<div className="w-80 h-60"></div>
 		</div>
 	);
 };
 
 export default NameInput;
-
-declare global {
-	interface Window {
-		adsbygoogle?: any;
-	}
-}

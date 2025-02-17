@@ -8,7 +8,7 @@ function HomePage() {
 
 	return onNameEdit ? (
 		<NameInput
-			time={10}
+			time={1}
 			name={name}
 			setName={setName}
 			setOnNameEdit={setOnNameEdit}
@@ -19,3 +19,9 @@ function HomePage() {
 }
 
 export default HomePage;
+
+declare global {
+	interface Window {
+		adsbygoogle: any[];
+	}
+}
