@@ -4,6 +4,7 @@ import { createHashRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import Statistics from "./pages/Statistics";
 import NotFound from "./pages/NotFound";
+import "./styles/main.css";
 
 // Switch to createHashRouter
 const router = createHashRouter([
